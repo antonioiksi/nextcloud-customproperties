@@ -67,6 +67,7 @@ export default {
 				{ name: 'Month', value: 'month' },
 				{ name: 'Time', value: 'time' },
 				{ name: 'Number', value: 'number' },
+				{ name: 'JSON Dict', value: 'json-dict' },
 			],
 		}
 	},
@@ -103,6 +104,10 @@ export default {
 
   &__propertylabel {
     flex: 4 0 0;
+  }
+
+  .propertytype, .propertyname {
+    width: 150px;
   }
 }
 </style>

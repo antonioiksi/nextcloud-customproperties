@@ -1,8 +1,14 @@
 <template>
 	<div>
 		<template v-for="(property, index) in properties">
+			<PropertySelectInput
+				v-if="property.propertytype == 'json-dict'"
+				:key="index"
+				:disabled="disabled"
+				:property="property"
+				@change="$emit('propertyChanged', $event)" />
 			<PropertyLinkInput
-				v-if="isType(property.propertytype, 'url')"
+				v-else-if="isType(property.propertytype, 'url')"
 				:key="index"
 				:disabled="disabled"
 				:property="property"
@@ -18,14 +24,17 @@
 </template>
 
 <script>
+
 import PropertyTextInput from './input/PropertyTextInput'
 import PropertyLinkInput from './input/PropertyLinkInput'
+import PropertySelectInput from './input/PropertySelectInput'
 
 export default {
 	name: 'PropertyList',
 	components: {
 		PropertyLinkInput,
 		PropertyTextInput,
+		PropertySelectInput
 	},
 	props: {
 		properties: {
@@ -37,6 +46,8 @@ export default {
 			default: false,
 		},
 	},
+	data: () => ({
+	}),
 	methods: {
 		isType(typeOfProperty, ...types) {
 			return types.includes(typeOfProperty)

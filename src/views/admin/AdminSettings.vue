@@ -1,9 +1,15 @@
 <template>
 	<section class="section">
-		<h2>{{ t('customproperties', 'Custom Properties') }}</h2>
+		<h2>{{ t('customproperties', 'Custom Propertiesssss') }}</h2>
 		<p class="settings-hint">
 			{{
 				t('customproperties', 'Custom Properties defined here are available to all users. They are shown in "Properties" tab in sidebar view. They can be accessed via WebDAV. Deleting properties will not wipe property values.')
+			}}
+		</p>
+		<br>
+		<p class="settings-hint">
+			{{
+				t('customproperties', 'For creating new JSON Dict put the json file with options into the folder "resources/json-customproperties", !IMPORTANT: file name must be match with property name. For example, property with name company must have file company.json ')
 			}}
 		</p>
 		<div>

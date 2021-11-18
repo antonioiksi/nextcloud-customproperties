@@ -21,5 +21,7 @@ class LoadAdditionalScriptsListener implements IEventListener
 
     public function addScript() {
         Util::addScript(Application::APP_ID, 'src-sidebartab');
+
+		Util::addScript(Application::APP_ID, 'src-custompropertiescolumn');
     }
 }

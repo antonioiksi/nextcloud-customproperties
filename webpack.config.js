@@ -6,5 +6,6 @@ module.exports = {
 	entry: {
 		sidebartab: path.resolve(path.join('src', 'sidebartab.js')),
 		adminsettings: path.resolve(path.join('src', 'adminsettings.js')),
+		custompropertiescolumn: path.resolve(path.join('src', 'custompropertiescolumn.js')),
 	},
 }

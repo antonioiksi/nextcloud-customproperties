@@ -1,8 +1,8 @@
 <template>
 	<div :class="{ 'icon-loading': loading }">
 		<div v-show="!loading">
-			<h3>{{ t('customproperties', 'Custom Properties') }}</h3>
-			<PropertyList :properties="properties.knownProperties" @propertyChanged="updateProperty($event)" />
+			<h3>{{ t('customproperties', 'Custom Propertiessss1') }}</h3>
+			<PropertyList :properties="properties.knownProperties" @propertyChanged="updateProperty($event)"  />
 			<EmptyPropertiesPlaceholder v-if="properties.knownProperties.length === 0" />
 
 			<template v-if="properties.otherProperties.length > 0">
