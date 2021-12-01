@@ -16,6 +16,30 @@ class PageController extends Controller {
         $this->logger = $logger;
     }
 
+	/**
+	 * @NoAdminRequired
+	 * @NoCSRFRequired
+	 */
+	public function reindexFiles() {
+		$message = 'I am here!';
+		$this->logger->error($message);
+		$this->logger->warning($message);
+		$this->logger->info($message);
+
+		try {
+//		$output = shell_exec('ls -lart');
+//		$output = shell_exec("sleep 1 && echo 'hi' && sleep 1");
+//		$output = shell_exec("sudo -u www-data php /var/www/nextcloud/occ files:scan --all");
+			$output = shell_exec("php occ files:scan --all");
+			$this->logger->info($output);
+			$result = array('success' => json_encode( $output));
+		} catch (Exception $e) {
+			$this->logger->error($e);
+			$result = array('error' => json_encode( $e));
+		}
+		return new JSONResponse($result);
+	}
+
     /**
      * @NoAdminRequired
      * @NoCSRFRequired
@@ -25,6 +49,11 @@ class PageController extends Controller {
         $this->logger->error($message);
         $this->logger->warning($message);
         $this->logger->info($message);
+
+        $output = shell_exec('ls -lart');
+        // echo "<pre>$output</pre>";
+        $this->logger->info($output);
+
         $params = array('test' => 'hi');
         return new JSONResponse($params);
     }
@@ -51,13 +80,13 @@ class PageController extends Controller {
         // $contentType = 'application/json';
         // return new DownloadResponse($path, $contentType);
     }
-    
+
     /**
      * @NoAdminRequired
      * @NoCSRFRequired
      */
     public function xml() {
-        
+
         echo('sdfsdfsdfsdfsdfaaaaaaaaa');
         $path = dirname(__FILE__).'/../../appinfo/info.xml';
         $this->logger->info($path);

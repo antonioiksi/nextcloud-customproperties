@@ -26,6 +26,10 @@
 			</template>
 			<EmptyPropertiesPlaceholder v-else />
 		</div>
+		<hr>
+		<div>
+			<ReindexFilesButton />
+		</div>
 	</section>
 </template>
 
@@ -37,6 +41,7 @@ import '@nextcloud/dialogs/styles/toast.scss'
 import CreateCustomPropertyForm from '../../components/customPropertyForm/CreateCustomPropertyForm'
 import EditCustomPropertyForm from '../../components/customPropertyForm/EditCustomPropertyForm'
 import EmptyPropertiesPlaceholder from '../../components/emptypropertiesplaceholder/EmptyPropertiesPlaceholder'
+import ReindexFilesButton from './ReindexFilesButton.vue'
 
 export default {
 	name: 'AdminSettings',
@@ -44,6 +49,7 @@ export default {
 		EmptyPropertiesPlaceholder,
 		EditCustomPropertyForm,
 		CreateCustomPropertyForm,
+		ReindexFilesButton
 	},
 	data() {
 		return {
