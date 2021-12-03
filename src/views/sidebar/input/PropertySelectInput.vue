@@ -71,11 +71,18 @@ export default {
 			]
 			// const linkJsonOptions = 'http://192.168.56.5:8000/resources/json-customproperties/default.json'
 			const linkJsonOptionsDefault = generateUrl(`/resources/json-customproperties/default.json`).replace('/index.php','')
-			const linkJsonOptions = generateUrl(`/resources/json-customproperties/${this.property.propertyname}.json`).replace('/index.php','')
+			// const linkJsonOptions = generateUrl(`/resources/json-customproperties/${this.property.propertyname}.json`).replace('/index.php','')
+			const linkJsonOptions = generateUrl(`/apps/${this.property.propertyname}/api/0.1/notes`)
+			// alert(linkJsonOptions)
+			console.log('linkJsonOptions',linkJsonOptions)
 			try {
 				console.log(linkJsonOptions)
 				const { data } = await axios.get(linkJsonOptions)
 				console.log('data', data)
+				data.forEach(function (el) {
+  					el.name = el.title;
+				});
+				console.log('dataResult', data)
 				this.options = this.options.concat(data)
 				
 			} catch (e) {
