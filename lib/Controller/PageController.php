@@ -26,17 +26,12 @@ class PageController extends Controller {
 		$this->logger->warning($message);
 		$this->logger->info($message);
 
-		try {
 //		$output = shell_exec('ls -lart');
 //		$output = shell_exec("sleep 1 && echo 'hi' && sleep 1");
 //		$output = shell_exec("sudo -u www-data php /var/www/nextcloud/occ files:scan --all");
-			$output = shell_exec("php occ files:scan --all");
-			$this->logger->info($output);
-			$result = array('success' => json_encode( $output));
-		} catch (Exception $e) {
-			$this->logger->error($e);
-			$result = array('error' => json_encode( $e));
-		}
+		$output = shell_exec("php occ files:scan --all");
+		$this->logger->info($output);
+		$result = array('result' => json_encode( $output));
 		return new JSONResponse($result);
 	}
 

@@ -94,10 +94,30 @@ export default {
 				await axios.put(url, { customProperty })
 				await this.getDataFromApi()
 				showSuccess(this.t('customproperties', 'New Custom Property has been added!'))
+
 			} catch (e) {
 				console.error(e)
 				showError(t('customproperties', 'Error saving property, please check constraints.'))
 			}
+
+			// eslint-disable-next-line no-console
+			console.log('customProperty', customProperty)
+			if (customProperty.propertytype === 'json-dict') {
+				// eslint-disable-next-line no-console
+				console.log('customProperty', customProperty)
+				const execUrl = generateUrl('/apps/customproperties/exec')
+				try {
+					const command = `./apps/customproperties/scripts/copy_dictionary.sh ${customProperty.propertyname}`
+					const { data } = await axios.post(execUrl, { command })
+					// eslint-disable-next-line no-console
+					console.log(data)
+					showSuccess(this.t('customproperties', data.result))
+				} catch (e) {
+					console.error(e)
+					showError(t('customproperties', 'Error execute command.'))
+				}
+			}
+
 		},
 	},
 }

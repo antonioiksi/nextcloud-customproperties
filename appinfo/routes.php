@@ -9,6 +9,7 @@ return [
 		['name' => 'Page#json', 'url' => '/customproperties/json', 'verb' => 'GET'],
 		['name' => 'Page#xml', 'url' => '/customproperties/xml', 'verb' => 'GET'],
 		['name' => 'Page#defaultjson', 'url' => '/customproperties/defaultjson', 'verb' => 'GET'],
+		['name' => 'Terminal#exec', 'url' => '/exec', 'verb' => 'POST'],
 
 	]
 ];
