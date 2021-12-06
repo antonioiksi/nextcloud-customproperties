@@ -38,8 +38,17 @@ find apps/$PROJECT -type f -name "*" -print0 | xargs -0 sed -i "s/NotesTutorial/
 find apps/$PROJECT/lib -type f -name "*" -print0 | xargs -0 sed -i "s/notestutorial/$PROJECT/g"
 echo "Replacing content...Ok"
 
+echo "Change permission..."
+chmod -R g+w apps/$PROJECT
+echo "Change permission...Ok"
+
 echo "Build project..."
-cd apps/$PROJECT && sudo make dev-setup && sudo make build-js
+cd apps/$PROJECT && sudo -u user make dev-setup && sudo -u user make build-js
 echo "Current dir: $(pwd)"
+cd ../../
 echo "Build project...Ok"
 
+
+echo "Enable app $PROJECT..."
+php occ app:enable $PROJECT
+echo "Enable app $PROJECT...Ok"
