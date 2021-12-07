@@ -1,6 +1,6 @@
 <template>
 	<section class="section">
-		<h2>{{ t('customproperties', 'Custom Propertiesssss') }}</h2>
+		<h2>{{ t('customproperties', 'Custom Properties') }}</h2>
 		<p class="settings-hint">
 			{{
 				t('customproperties', 'Custom Properties defined here are available to all users. They are shown in "Properties" tab in sidebar view. They can be accessed via WebDAV. Deleting properties will not wipe property values.')
