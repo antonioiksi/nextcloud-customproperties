@@ -1,66 +1,22 @@
-# Подготовка
+# Custom Properties
+Place this app in **nextcloud/apps/customproperties**
 
-Требования:
-- nextcloud 22.2.3
-    - node 15, установленная глобально
-    - python 3.8
-    - apache
+## Usage
+DAV's `PROPPATCH` request type allows adding custom properties to items.
+Since custom properties are not accessible via the frontend, this plugin will list all properties of an item in the sidebar.
+The plugin allows to define "well-known" properties in the admin settings which are presented as input fields in the "properties" tab in files app sidebar.
+Changing the property in the tab will also change the DAV property and hence it will be possible to access the properties via DAV call `PROPFIND`.
 
-Разрешаем www-data подключаться к пользователю и запускать процессы. Открываем:
+## API
+It is also possible to manage properties via Rest API (admin privileges required):
 
-    sudo visudo -f /etc/sudoers.d/custom
-    
- Добавляем строку:
-  
-    www-data ALL=(user:user) NOPASSWD:ALL  
-     
- Далее добавляем пользователя в группу www-data:
- 
-    sudo usermod -aG www-data user
-    
- Разрешаем изменения в папке приложений:
- 
-     chmod -R g+w nextcloud/apps
-     
- Устанавиливаем группу для новых файлов по умолчанию:
- 
-     chmod g+s /nextcloud   
-     
-# Установка 
+| Verb          | Endpoint                                              | Purpose                  |
+| ------------- | ----------------------------------------------------- | ------------------------ |
+| GET           | /index.php/apps/customproperties/customproperties     | Get properties   |
+| PUT           | /index.php/apps/customproperties/customproperties     | Create new property      |
+| POST          | /index.php/apps/customproperties/customproperties     | Update property      |
+| DELETE        | /index.php/apps/customproperties/customproperties/:id | Delete existing property |
 
-Клонируем приложение-словарь в папку customprop_dict: 
-      
-      cd nextcloud/apps
-      git clone https://github.com/antonioiksi/nextcloud-customprop_dict.git customprop_dict
-      
-Клонируем основное приложение ветки feature-filestable-and-select-cp в папку customproperties: 
-  
-      cd nextcloud/apps
-      git clone https://github.com/antonioiksi/nextcloud-customproperties.git -b feature-filestable-and-select-cp customproperties
-      
-Компилируем приложение
-   
-      cd nextcloud/apps/customproperties
-      ./build.sh
-  
-Активируем установленное приложение:
-    
-        php occ app:enable customproperties
-        
-# Работа с приложением
-
-Нажимаем на аватар пользователя в правом верхнем углу и выбираем настройки. Далее в "Параметры сервера" находим "Основные параметры" и прокручиваем до "Пользовательские свойства":
-
-<img src="1.gif">
-
-В первом выпадающем меню выбираем "JSON Dict", далее вводим имя и название. Они должны состоять из одного слова, маленькими буквами, без использования цифр. После следует нажать "Добавить" и дождаться создания словаря. После обновления страницы вверху в панели приложений появится новое, с введеным названием:
-
-<img src="2.gif">
-
-В созданном приложении следует ввести теги, необходимые для последующего использования. Для создания нового тега следует нажать на "New element", ввести название и описание, после чего нажать кнопку сохранить:
-
-<img src="3.gif">
-
-После этих действий в метаданных каждого файла появится новое пользовательское свойство с тегами, записанными нами в приложении:
-
-<img src="4.gif">
+## Screenshots
+![Tab view in sidebar](.readme/sidebartab.png)
+![Settings in admin panel](.readme/adminsettings.png)
